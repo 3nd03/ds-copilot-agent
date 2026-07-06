@@ -1,0 +1,7 @@
+environments:
+  local:
+    blocked_tools: []
+  demo:
+    blocked_tools: []
+
+min_rows_for_training: 50

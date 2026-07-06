@@ -1,0 +1,11 @@
+google-adk
+mcp
+google-genai
+pandas
+scikit-learn
+shap
+ydata-profiling
+streamlit
+joblib
+pyyaml
+matplotlib
