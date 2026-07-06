@@ -7,7 +7,7 @@
 - [1-2 sentences: what the agent does end to end]
 
 ## Architecture
-- [diagram: Orchestrator -> Profiler/Modeler/Explainer sub-agents -> MCP server -> tools]
+- ![Architecture](architecture.png)
 - Orchestrator: decides step order, can skip cleaning
 - MCP server: profile_data, clean_data, train_models, explain_model
 - Security: Policy Server gates train_models on row count and blocked-tool list
