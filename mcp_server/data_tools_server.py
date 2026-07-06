@@ -91,7 +91,7 @@ def train_models(csv_path: str, target_column: str) -> dict:
     y = df[target_column]
     classification = _is_classification(y)
 
-    if classification and y.dtype == object:
+    if classification and not pd.api.types.is_numeric_dtype(y):
         y = LabelEncoder().fit_transform(y)
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)

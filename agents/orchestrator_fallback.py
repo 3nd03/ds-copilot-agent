@@ -10,11 +10,10 @@ from data_tools_server import profile_data, clean_data, train_models, explain_mo
 def run_pipeline(csv_path: str, target_column: str) -> dict:
     profile = profile_data(csv_path, target_column)
 
-    working_csv = csv_path
-    cleaning_report = None
-    if profile["needs_cleaning"]:
-        cleaning_report = clean_data(csv_path, target_column)
-        working_csv = cleaning_report["cleaned_csv_path"]
+    # clean_data also does categorical encoding, which train_models needs
+    # regardless of needs_cleaning (no missing/dupes doesn't mean no strings).
+    cleaning_report = clean_data(csv_path, target_column)
+    working_csv = cleaning_report["cleaned_csv_path"]
 
     training = train_models(working_csv, target_column)
     explanation = explain_model(training["model_path"], working_csv, target_column)
