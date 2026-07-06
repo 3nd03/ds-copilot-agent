@@ -1,0 +1,165 @@
+2026-07-06 11:27:33.166 Uvicorn server started on 0.0.0.0:8501
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://192.168.0.253:8501
+  External URL: http://149.241.116.200:8501
+
+C:\Users\User\AppData\Roaming\Python\Python314\site-packages\google\adk\features\_feature_decorator.py:72: UserWarning: [EXPERIMENTAL] feature FeatureName.PLUGGABLE_AUTH is enabled.
+  check_feature_enabled()
+StdioServerParameters is not recommended. Please use StdioConnectionParams.
+2026-07-06 16:37:19.645 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Users\User\Desktop\Projects\Capstone\capstone\app\streamlit_app.py", line 41, in <module>
+    result = asyncio.run(run_adk())
+  File "C:\Python314\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "C:\Python314\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Python314\Lib\asyncio\base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "C:\Users\User\Desktop\Projects\Capstone\capstone\app\streamlit_app.py", line 34, in run_adk
+    async for event in runner.run_async(
+    ...<3 lines>...
+        events.append(event)
+  File "C:\Users\User\AppData\Roaming\Python\Python314\site-packages\google\adk\runners.py", line 971, in run_async
+    if new_message and not new_message.role:
+                           ^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'role'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Roaming\Python\Python314\site-packages\pandas\core\indexes\base.py", line 3641, in get_loc
+    return self._engine.get_loc(casted_key)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 168, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 197, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7668, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7676, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'Churn '
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Roaming\Python\Python314\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Users\User\AppData\Roaming\Python\Python314\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 789, in code_to_exec
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Desktop\Projects\Capstone\capstone\app\streamlit_app.py", line 48, in <module>
+    result = run_pipeline(csv_path, target_column)
+  File "C:\Users\User\Desktop\Projects\Capstone\capstone\app\../agents\orchestrator_fallback.py", line 11, in run_pipeline
+    profile = profile_data(csv_path, target_column)
+  File "C:\Users\User\Desktop\Projects\Capstone\capstone\app\../mcp_server\data_tools_server.py", line 41, in profile_data
+    target_balance = df[target_column].value_counts(normalize=True).round(3).to_dict()
+                     ~~^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Roaming\Python\Python314\site-packages\pandas\core\frame.py", line 4378, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "C:\Users\User\AppData\Roaming\Python\Python314\site-packages\pandas\core\indexes\base.py", line 3648, in get_loc
+    raise KeyError(key) from err
+KeyError: 'Churn '
+Exception in callback _ProactorBasePipeTransport._call_connection_lost()
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost()>
+Traceback (most recent call last):
+  File "C:\Python314\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+2026-07-06 16:52:53.817 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Users\User\Desktop\Projects\Capstone\capstone\app\streamlit_app.py", line 41, in <module>
+    result = asyncio.run(run_adk())
+  File "C:\Python314\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "C:\Python314\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Python314\Lib\asyncio\base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "C:\Users\User\Desktop\Projects\Capstone\capstone\app\streamlit_app.py", line 34, in run_adk
+    async for event in runner.run_async(
+    ...<3 lines>...
+        events.append(event)
+  File "C:\Users\User\AppData\Roaming\Python\Python314\site-packages\google\adk\runners.py", line 971, in run_async
+    if new_message and not new_message.role:
+                           ^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'role'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Roaming\Python\Python314\site-packages\pandas\core\indexes\base.py", line 3641, in get_loc
+    return self._engine.get_loc(casted_key)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 168, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 197, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7668, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7676, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'churn'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Roaming\Python\Python314\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Users\User\AppData\Roaming\Python\Python314\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 789, in code_to_exec
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Desktop\Projects\Capstone\capstone\app\streamlit_app.py", line 48, in <module>
+    result = run_pipeline(csv_path, target_column)
+  File "C:\Users\User\Desktop\Projects\Capstone\capstone\app\../agents\orchestrator_fallback.py", line 11, in run_pipeline
+    profile = profile_data(csv_path, target_column)
+  File "C:\Users\User\Desktop\Projects\Capstone\capstone\app\../mcp_server\data_tools_server.py", line 41, in profile_data
+    missing = df.isna().mean().round(3).to_dict()
+                     ^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Roaming\Python\Python314\site-packages\pandas\core\frame.py", line 4378, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "C:\Users\User\AppData\Roaming\Python\Python314\site-packages\pandas\core\indexes\base.py", line 3648, in get_loc
+    raise KeyError(key) from err
+KeyError: 'churn'
+C:\Users\User\AppData\Roaming\Python\Python314\site-packages\sklearn\linear_model\_logistic.py:406: ConvergenceWarning: lbfgs failed to converge after 1000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=1000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+Background dataset has 200 samples but max_samples=100. Subsampling to 100 samples for SHAP value computation. To use all samples, set max_samples=200 when initializing the masker.
+C:\Users\User\Desktop\Projects\Capstone\capstone\app\../mcp_server\data_tools_server.py:135: FutureWarning: The NumPy global RNG was seeded by calling `np.random.seed`. In a future version this function will no longer use the global RNG. Pass `rng` explicitly to opt-in to the new behaviour and silence this warning.
+  
+C:\Users\User\AppData\Roaming\Python\Python314\site-packages\sklearn\linear_model\_logistic.py:406: ConvergenceWarning: lbfgs failed to converge after 1000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=1000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+Background dataset has 200 samples but max_samples=100. Subsampling to 100 samples for SHAP value computation. To use all samples, set max_samples=200 when initializing the masker.
+C:\Users\User\Desktop\Projects\Capstone\capstone\app\../mcp_server\data_tools_server.py:135: FutureWarning: The NumPy global RNG was seeded by calling `np.random.seed`. In a future version this function will no longer use the global RNG. Pass `rng` explicitly to opt-in to the new behaviour and silence this warning.
+  
+C:\Users\User\AppData\Roaming\Python\Python314\site-packages\sklearn\linear_model\_logistic.py:406: ConvergenceWarning: lbfgs failed to converge after 1000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=1000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+Background dataset has 200 samples but max_samples=100. Subsampling to 100 samples for SHAP value computation. To use all samples, set max_samples=200 when initializing the masker.
+C:\Users\User\Desktop\Projects\Capstone\capstone\app\../mcp_server\data_tools_server.py:135: FutureWarning: The NumPy global RNG was seeded by calling `np.random.seed`. In a future version this function will no longer use the global RNG. Pass `rng` explicitly to opt-in to the new behaviour and silence this warning.
+  

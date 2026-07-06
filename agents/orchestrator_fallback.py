@@ -2,8 +2,10 @@
 # Same decision logic as the ADK orchestrator, just without the framework.
 # You lose the ADK scoring row but keep a working, explainable pipeline.
 
+import os
 import sys
-sys.path.insert(0, "../mcp_server")
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "mcp_server"))
 from data_tools_server import profile_data, clean_data, train_models, explain_model
 
 

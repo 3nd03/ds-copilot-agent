@@ -24,7 +24,9 @@ server = Server("ds-copilot")
 
 
 def _load(csv_path: str) -> pd.DataFrame:
-    return pd.read_csv(csv_path)
+    df = pd.read_csv(csv_path)
+    df.columns = df.columns.str.strip()
+    return df
 
 
 def _is_classification(y: pd.Series) -> bool:
@@ -59,17 +61,21 @@ def profile_data(csv_path: str, target_column: str) -> dict:
 
 
 def clean_data(csv_path: str, target_column: str) -> dict:
-    """Drops duplicates, imputes missing values, encodes categoricals. Saves cleaned CSV."""
     df = _load(csv_path)
     before = len(df)
     df = df.drop_duplicates()
 
-    for col in df.columns:
-        if df[col].isna().any():
-            if df[col].dtype == object:
-                df[col] = df[col].fillna(df[col].mode().iloc[0])
-            else:
-                df[col] = df[col].fillna(df[col].median())
+    id_cols = [c for c in df.columns if "id" in c.lower() and df[c].nunique() == len(df)]
+    df = df.drop(columns=id_cols)
+
+    for col in df.select_dtypes(include="object").columns:
+        if col == target_column:
+            continue
+        coerced = pd.to_numeric(df[col], errors="coerce")
+        if coerced.notna().mean() > 0.9:
+            df[col] = coerced.fillna(coerced.median())
+        else:
+            df[col] = df[col].fillna(df[col].mode().iloc[0])
 
     for col in df.select_dtypes(include="object").columns:
         if col != target_column:
@@ -79,6 +85,7 @@ def clean_data(csv_path: str, target_column: str) -> dict:
     df.to_csv(out_path, index=False)
     return {
         "rows_dropped": before - len(df),
+        "id_columns_dropped": id_cols,
         "cleaned_csv_path": str(out_path),
         "columns_encoded": list(df.select_dtypes(include="int64").columns),
     }

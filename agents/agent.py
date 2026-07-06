@@ -1,18 +1,20 @@
-# FLAG: ADK had breaking changes at 2.0. Verify these import paths against
-# `pip show google-adk` version and adk-docs before running. If MCPToolset's
-# import path has moved, the fallback is orchestrator_fallback.py in this folder,
-# which calls the same MCP tools directly without ADK.
-
 from google.adk.agents import LlmAgent
-from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset
+from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, StdioConnectionParams
 from mcp import StdioServerParameters
 
-MODEL = "gemini-3-flash-preview"
+import os
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "mcp_server"))
+
+MODEL = "gemini-2.5-flash"
 
 mcp_tools = MCPToolset(
-    connection_params=StdioServerParameters(
-        command="python",
-        args=["mcp_server/data_tools_server.py"],
+    connection_params=StdioConnectionParams(
+        server_params=StdioServerParameters(
+            command="python",
+            args=["mcp_server/data_tools_server.py"],
+        ),
+        timeout=5,
     )
 )
 
@@ -54,11 +56,13 @@ root_agent = LlmAgent(
     name="DSCopilotOrchestrator",
     model=MODEL,
     description="Coordinates profiling, modeling, and explanation for a business dataset.",
-    instruction="""You are a data science orchestrator. Given a csv_path and target_column:
-    1. Delegate to ProfilerAgent first, always.
-    2. Delegate to ModelerAgent next, using the profiling outcome to decide if cleaning ran.
-    3. Delegate to ExplainerAgent last.
-    Do not skip steps out of order. Summarise the full pipeline result for the user at the end,
-    written for a business stakeholder, not an engineer.""",
+    instruction="""You are a data science orchestrator. Given a csv_path and target_column,
+    you MUST complete all three steps in this exact order, do not stop after one:
+    1. Transfer to ProfilerAgent.
+    2. Immediately after ProfilerAgent responds, transfer to ModelerAgent. Do not skip this
+        even if ProfilerAgent's answer seems complete on its own.
+    3. Immediately after ModelerAgent responds, transfer to ExplainerAgent.
+    Only after all three have run, summarise the full pipeline for a business stakeholder.
+    Stopping after step 1 or 2 is a failure.""",
     sub_agents=[profiler_agent, modeler_agent, explainer_agent],
 )

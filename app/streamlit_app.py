@@ -1,9 +1,15 @@
 import asyncio
 import sys
+from unittest import runner
+from requests import session
 import streamlit as st
+import os
 
-sys.path.insert(0, "..")
-sys.path.insert(0, "../agents")
+from google.genai import types
+
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "agents"))
 
 st.set_page_config(page_title="DS Copilot Agent", layout="wide")
 st.title("Data Science Copilot Agent")
@@ -31,9 +37,11 @@ if run_clicked:
                 runner = Runner(agent=root_agent, app_name="ds_copilot", session_service=session_service)
                 session = await session_service.create_session(app_name="ds_copilot", user_id="oscar")
                 events = []
+                from google.genai import types
+                msg = types.Content(role="user", parts=[types.Part(text=f"csv_path={csv_path}, target_column={target_column}")])
                 async for event in runner.run_async(
                     user_id="oscar", session_id=session.id,
-                    new_message=f"csv_path={csv_path}, target_column={target_column}",
+                    new_message=msg,
                 ):
                     events.append(event)
                 return events[-1]
