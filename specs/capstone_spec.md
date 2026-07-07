@@ -1,23 +1,27 @@
 # Spec: DS Copilot Agent
 
 ## Problem
-- [what business problem, who has it, why it costs money/time]
+Businesses with customer data want to know who is about to leave and why, but profiling, cleaning, modeling, and explaining a dataset properly takes a data scientist hours each time.
 
 ## Goal
-- [what the agent must do, one sentence]
+Given a CSV and a target column, decide whether cleaning is needed, train and compare two models, and explain the winner's predictions with SHAP.
 
 ## Non-goals
-- [explicitly out of scope, e.g. deployment to GCP, hyperparameter tuning]
+- Deployment to a live public endpoint
+- Hyperparameter tuning beyond default sklearn settings
+- Regression targets, only classification is tested
 
 ## Inputs / Outputs
-- Input: CSV + target column name
-- Output: [profile summary, model scores, feature explanation, in what format]
+- Input: CSV file, target column name
+- Output: profiling summary, model scores for both candidates, top SHAP features, shown in the Streamlit app
 
 ## Success criteria
-- [what "working" means, e.g. runs end to end on a 5k-row churn dataset in under 2 minutes]
+Runs end to end on the Telco Customer Churn dataset (7,043 rows) without error, correctly skips or runs cleaning based on the data, produces a trained model and a SHAP explanation that matches domain intuition.
 
-## Architecture (one paragraph + diagram reference)
-- [orchestrator delegates to 3 sub-agents via MCP tools, see README diagram]
+## Architecture
+Root orchestrator delegates to three sub-agents (profiling, modeling, explaining), each calling tools on an MCP server. See README for the full diagram.
 
 ## Risks
-- [ADK API instability, SHAP compute time on large datasets, etc.]
+- ADK's API changed at 2.0, breaking the message format and connection class this code depends on
+- Gemini's free tier caps at 20 requests/day, limiting live testing of the ADK path
+- The orchestrator's step order is LLM-decided, not guaranteed to repeat exactly the same way twice
