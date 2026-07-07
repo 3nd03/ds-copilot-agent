@@ -1,0 +1,5 @@
+﻿artifacts/
+agents/artifacts/
+mcp_server/artifacts/
+__pycache__/
+*.pyc
