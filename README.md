@@ -1,4 +1,4 @@
-# DS Copilot Agent
+# Lucid AI Agent
 
 ## Problem
 Any business with customer data wants to know who is about to leave and why. Doing that properly, profiling, cleaning, modeling, explaining, takes a data scientist hours per dataset. Most teams skip it or do it shallow.
